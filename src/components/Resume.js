@@ -1,12 +1,30 @@
 // components/Resume.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaEye, FaDownload, FaFileAlt } from 'react-icons/fa';
 
 const Resume = () => {
   const [pdfError, setPdfError] = useState(false);
   const [pdfLoading, setPdfLoading] = useState(true);
+  const [pdfUrl, setPdfUrl] = useState('');
 
-  const pdfUrl = process.env.PUBLIC_URL + '/Jinfeng_He_Resume_073124.pdf';
+  useEffect(() => {
+    // Set the PDF URL with proper path for Next.js
+    setPdfUrl('/Jinfeng_He_Resume_073124.pdf');
+    
+    // Test if the PDF is accessible
+    fetch('/Jinfeng_He_Resume_073124.pdf', { method: 'HEAD' })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`PDF not found: ${response.status}`);
+        }
+        console.log('PDF is accessible');
+      })
+      .catch(error => {
+        console.error('PDF accessibility check failed:', error);
+        setPdfError(true);
+        setPdfLoading(false);
+      });
+  }, []);
 
   const handlePdfLoad = () => {
     setPdfLoading(false);
@@ -242,6 +260,35 @@ const Resume = () => {
                   }}
                 >
                   <FaDownload /> DOWNLOAD RESUME
+                </a>
+                <a 
+                  href={pdfUrl}
+                  style={{
+                    background: '#fff',
+                    color: '#000',
+                    padding: '15px 30px',
+                    textDecoration: 'none',
+                    fontFamily: 'Roboto Mono, monospace',
+                    fontWeight: '700',
+                    textTransform: 'uppercase',
+                    letterSpacing: '2px',
+                    fontSize: '1rem',
+                    border: '3px solid #000',
+                    transition: 'all 0.3s ease',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '10px'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.target.style.background = '#000';
+                    e.target.style.color = '#fff';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.background = '#fff';
+                    e.target.style.color = '#000';
+                  }}
+                >
+                  <FaFileAlt /> DIRECT PDF LINK
                 </a>
               </div>
             </div>
