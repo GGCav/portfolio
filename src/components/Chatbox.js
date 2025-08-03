@@ -129,76 +129,78 @@ const Chatbox = () => {
   };
 
   return (
-    <div className="chatbox-container">
-      <div className="chatbox-header">
-        <div className="chatbox-title">
-          <FaRobot className="chatbox-icon" />
-          <span>AI Assistant</span>
+    <div className="chatbox-panel">
+      <div className="chatbox-container">
+        <div className="chatbox-header">
+          <div className="chatbox-title">
+            <FaRobot className="chatbox-icon" />
+            <span>AI Assistant</span>
+          </div>
+          <button 
+            className="ai-toggle-btn"
+            onClick={() => setUseAI(!useAI)}
+            title={useAI ? "Switch to Fallback Mode" : "Switch to AI Mode"}
+          >
+            {useAI ? <FaToggleOn /> : <FaToggleOff />}
+            <span>{useAI ? "AI ON" : "AI OFF"}</span>
+          </button>
         </div>
-        <button 
-          className="ai-toggle-btn"
-          onClick={() => setUseAI(!useAI)}
-          title={useAI ? "Switch to Fallback Mode" : "Switch to AI Mode"}
-        >
-          {useAI ? <FaToggleOn /> : <FaToggleOff />}
-          <span>{useAI ? "AI ON" : "AI OFF"}</span>
-        </button>
-      </div>
 
-      <div className="chatbox-messages">
-        {messages.map((message) => (
-          <div key={message.id} className={`message ${message.type}`}>
-            <div className="message-avatar">
-              {message.type === 'ai' ? <FaRobot /> : <FaUser />}
-            </div>
-            <div className="message-content">
-              <div className="message-text">{message.content}</div>
-              <div className="message-time">
-                {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+        <div className="chatbox-messages">
+          {messages.map((message) => (
+            <div key={message.id} className={`message ${message.type}`}>
+              <div className="message-avatar">
+                {message.type === 'ai' ? <FaRobot /> : <FaUser />}
+              </div>
+              <div className="message-content">
+                <div className="message-text">{message.content}</div>
+                <div className="message-time">
+                  {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-        
-        {isLoading && (
-          <div className="message ai">
-            <div className="message-avatar">
-              <FaRobot />
-            </div>
-            <div className="message-content">
-              <div className="message-text">
-                <span className="typing-indicator">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </span>
+          ))}
+          
+          {isLoading && (
+            <div className="message ai">
+              <div className="message-avatar">
+                <FaRobot />
+              </div>
+              <div className="message-content">
+                <div className="message-text">
+                  <span className="typing-indicator">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </span>
+                </div>
               </div>
             </div>
-          </div>
-        )}
-        
-        <div ref={messagesEndRef} />
-      </div>
+          )}
+          
+          <div ref={messagesEndRef} />
+        </div>
 
-      <form onSubmit={handleSubmit} className="chatbox-input">
-        <input
-          type="text"
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-          placeholder={useAI ? "Chat with Jinfeng..." : "Ask me anything (fallback mode)..."}
-          disabled={isLoading}
-        />
-        <button type="submit" disabled={isLoading || !inputValue.trim()}>
-          <FaPaperPlane />
-        </button>
-      </form>
+        <form onSubmit={handleSubmit} className="chatbox-input">
+          <input
+            type="text"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            placeholder={useAI ? "Chat with Jinfeng..." : "Ask me anything (fallback mode)..."}
+            disabled={isLoading}
+          />
+          <button type="submit" disabled={isLoading || !inputValue.trim()}>
+            <FaPaperPlane />
+          </button>
+        </form>
 
-      <div className="chatbox-info">
-        {useAI ? (
-          <p>💡 AI Mode: Powered by advanced semantic search and Google Gemini</p>
-        ) : (
-          <p>💡 Fallback Mode: Simple keyword matching for instant responses</p>
-        )}
+        <div className="chatbox-info">
+          {useAI ? (
+            <p>💡 AI Mode: Powered by advanced semantic search and Google Gemini</p>
+          ) : (
+            <p>💡 Fallback Mode: Simple keyword matching for instant responses</p>
+          )}
+        </div>
       </div>
     </div>
   );
