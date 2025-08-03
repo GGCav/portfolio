@@ -103,6 +103,7 @@ export async function POST(req: NextRequest) {
     const text = response.text();
 
     console.log('AI response generated successfully');
+    console.log('AI Response:', text);
 
     return NextResponse.json({
       response: text,
