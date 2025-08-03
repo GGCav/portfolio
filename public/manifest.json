@@ -1,26 +1,32 @@
 {
-  "short_name": "JH portfolio",
-  "name": "portfolio",
-  "description": "My portfolio website",
+  "short_name": "Jinfeng He",
+  "name": "Jinfeng He - Portfolio",
+  "description": "Full-stack developer and researcher at Cornell University",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "src": "GGCav Black Hexagonal Icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
-      "src": "logo192.png",
+      "src": "GGCav Black Hexagonal Icon.png",
+      "sizes": "192x192",
       "type": "image/png",
-      "sizes": "192x192"
+      "purpose": "any"
     },
     {
-      "src": "logo512.png",
+      "src": "GGCav Black Hexagonal Icon.png",
+      "sizes": "180x180",
       "type": "image/png",
-      "sizes": "512x512"
+      "purpose": "apple touch"
     }
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#1a1a1a",
+  "background_color": "#000000",
+  "orientation": "portrait-primary",
+  "categories": ["productivity", "business", "education"],
+  "lang": "en"
 }
