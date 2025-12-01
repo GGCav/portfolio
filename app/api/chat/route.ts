@@ -13,7 +13,7 @@ const supabase = createClient(
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY!);
 const embeddings = new GoogleGenerativeAIEmbeddings({
   apiKey: process.env.GOOGLE_API_KEY!,
-  model: "text-embedding-004", // Free Google embedding model
+  model: "gemini-2.5-flash", // Free Google embedding model
 });
 
 // Persona-driven prompt template
