@@ -96,7 +96,8 @@ export async function POST(req: NextRequest) {
 
     // 5. Generate response using Google Gemini
     console.log('Generating AI response...');
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+    // Use the latest stable Gemini 1.5 flash model alias to avoid v1 404s
+    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash-latest' });
     
     const result = await model.generateContent(personaPrompt);
     const response = await result.response;
