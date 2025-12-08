@@ -11,7 +11,8 @@ const supabase = createClient(
 );
 
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY!);
-const MODEL_NAME = process.env.GOOGLE_GENAI_MODEL || 'gemini-1.5-flash';
+// Default to a stable explicit model id to avoid 404s from aliases
+const MODEL_NAME = process.env.GOOGLE_GENAI_MODEL || 'gemini-1.5-flash-001';
 const embeddings = new GoogleGenerativeAIEmbeddings({
   apiKey: process.env.GOOGLE_API_KEY!,
   model: "text-embedding-004", // Free Google embedding model

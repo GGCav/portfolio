@@ -30,10 +30,11 @@ if (process.env.GOOGLE_API_KEY.includes('your_') || process.env.GOOGLE_API_KEY.l
 async function testGoogleAPI() {
   try {
     const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
+    const modelName = process.env.GOOGLE_GENAI_MODEL || 'gemini-1.5-flash-001';
     
     // Test 1: Test text generation
     console.log('\n🤖 Testing text generation...');
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+    const model = genAI.getGenerativeModel({ model: modelName });
     const result = await model.generateContent('Hello, this is a test.');
     const response = await result.response;
     console.log('✅ Text generation successful');
