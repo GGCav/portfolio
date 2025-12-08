@@ -11,6 +11,7 @@ const supabase = createClient(
 );
 
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY!);
+const MODEL_NAME = process.env.GOOGLE_GENAI_MODEL || 'gemini-1.5-flash';
 const embeddings = new GoogleGenerativeAIEmbeddings({
   apiKey: process.env.GOOGLE_API_KEY!,
   model: "text-embedding-004", // Free Google embedding model
@@ -96,8 +97,8 @@ export async function POST(req: NextRequest) {
 
     // 5. Generate response using Google Gemini
     console.log('Generating AI response...');
-    // Use the latest stable Gemini 1.5 flash model alias to avoid v1 404s
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash-latest' });
+    // Use configurable model name (defaults to Gemini 1.5 Flash)
+    const model = genAI.getGenerativeModel({ model: MODEL_NAME });
     
     const result = await model.generateContent(personaPrompt);
     const response = await result.response;
